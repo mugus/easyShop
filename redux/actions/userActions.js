@@ -36,6 +36,7 @@ export const userLogin = (email, password) => async (dispatch) => {
       },
     });
 
+    console.log("data: ",data);
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     const jsonValue = JSON.stringify(data);
     await AsyncStorage.setItem('eshop-user', jsonValue);

@@ -92,7 +92,7 @@ const Checkout = (props) => {
             ))}
           </Picker>
         </Item>
-        <View style={{ width: '80%', alignItems: 'center' }}>
+        <View style={{ width: 150, alignItems: 'center' }}>
           <Button title='Confirm' onPress={() => checkoutHandler()} />
         </View>
       </FormContainer>

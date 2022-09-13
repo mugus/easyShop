@@ -7,6 +7,14 @@ import {
   USER_REGISTER_SUCCESS,
 } from '../constants';
 
+
+const initialState = {
+  loading: true,
+  userInfo: {}
+};
+
+
+
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_REGISTER_REQUEST:

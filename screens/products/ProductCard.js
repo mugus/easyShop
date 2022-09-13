@@ -9,10 +9,10 @@ let { width } = Dimensions.get('window');
 const ProductCard = (props) => {
   const { addToCart } = useContext(StoreContext);
   const { item } = props;
-
+  
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         resizeMode='contain'
         source={{
           uri: item.image
@@ -20,7 +20,8 @@ const ProductCard = (props) => {
             : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png',
         }}
         style={styles.image}
-      />
+      /> */}
+      <Image resizeMode='contain' source={{uri: `http://197.243.14.102:3000/public/uploads/${item.image}`}} style={styles.image}/>
       <View style={styles.card} />
       <Text style={styles.title}>{item.name}</Text>
       <Text style={styles.price}>${item.price}</Text>

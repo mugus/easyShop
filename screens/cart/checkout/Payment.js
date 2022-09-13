@@ -16,9 +16,10 @@ import {
 } from 'native-base';
 
 const methods = [
-  { name: 'Cash on Delivery', value: 1 },
-  { name: 'Bank Transfer', value: 2 },
-  { name: 'Card Payment', value: 3 },
+  // { name: 'Cash on Delivery', value: 1 },
+  // { name: 'Bank Transfer', value: 2 },
+  // { name: 'Card Payment', value: 3 },
+  { name: 'Stripe', value: 4 },
 ];
 
 const paymentCards = [

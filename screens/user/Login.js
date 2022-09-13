@@ -6,12 +6,17 @@ import Error from '../../components/Error';
 import FormContainer from '../../components/form/FormContainer';
 import Input from '../../components/form/Input';
 import StoreContext from '../../context/store-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { userLogin, isOnline } = useContext(StoreContext);
+  // const { userInfo } = useSelector((state) => state.userInfo);
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (isOnline) {
@@ -23,13 +28,45 @@ const Login = ({ navigation }) => {
     if (email === '' || password === '') {
       setError('Please fill in your credentials');
     } else {
+      // fetch('http://197.243.14.102:3000/api/v1/users/login', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     email:email,
+      //     password:password 
+      //    })
+      //    })
+      // .then((response) => response.json())
+      // .then((json) => {
+      //   alert("Logged in")
+      //   console.log(json);
+      //   const jsonValue = JSON.stringify(json);
+      //   AsyncStorage.setItem('eshop-user', jsonValue);
+      //   userLogin(email, password)
+      //   navigation.navigate('User Profile');
+      //     // You can navigate here as well
+      //     // navigation.navigate('SomeScreen');
+      //     // return json.movies;
+      // })
+      // .catch((error) => {
+      //     console.error(error);
+      // });
+
+      // userLogin(email, password);
+
       userLogin(email, password);
-      Toast.show({
-        topOffset: 60,
-        type: 'success',
-        text1: 'Login Succeeded',
-        text2: `Welcome`,
-      });
+      // console.log("userInfo: ",userInfo);
+      // Toast.show({
+      //   topOffset: 60,
+      //   type: 'success',
+      //   text1: 'Login Succeeded',
+      //   text2: `Welcome`,
+      // });
+      
+      navigation.navigate('User Profile');
     }
   };
 

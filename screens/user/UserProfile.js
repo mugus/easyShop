@@ -6,7 +6,7 @@ import EasyButton from '../../components/EasyButton';
 
 const UserProfile = ({ navigation }) => {
   const { userInfo, isOnline, userLogout } = useContext(StoreContext);
-
+console.log("User Profile called userInfo: ",userInfo);
   useEffect(() => {
     if (!isOnline) {
       navigation.navigate('Login');
