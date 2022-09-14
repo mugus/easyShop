@@ -34,11 +34,30 @@ const paymentCards = [
 const Payment = (props) => {
   const { confirmPayment } = useStripe();
   // const order = props.route.params;
-  const order = props.route.params;
 
   const [select, setSelect] = useState();
   const [card, setCard] = useState();
   
+
+  const { createPaymentMethod, handleCardAction } = useStripe();
+
+  const pay = () => {
+    // Gather customer billing information (for example, email)
+    const billingDetails: CreatePaymentMethod.BillingDetails = {card};
+
+    // Create payment method
+    const { paymentMethod, error } = createPaymentMethod({
+      paymentMethodType: 'Card',
+      paymentMethodData: {
+        billingDetails,
+      }
+
+    });
+    const order = props.route.params;
+    props.navigation.navigate('Confirm', { order })
+    console.log("Data: ",billingDetails);
+  };
+
   return (
     <Container>
       <Header>
@@ -101,12 +120,13 @@ const Payment = (props) => {
             ))}
           </Picker>
         ) : null} */}
-        <View style={{ marginTop: 20, width: '100%', alignSelf: 'center' }}>
+        <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
           {
             card ?
             <Button
                 title={'Confirm'}
-                onPress={() => props.navigation.navigate('Confirm', { order })}
+                onPress={pay}
+                // onPress={() => props.navigation.navigate('Confirm', { order })}
               />
              : 
              <Button

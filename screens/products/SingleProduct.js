@@ -41,10 +41,7 @@ const SingleProduct = (props) => {
       <ScrollView style={{ marginBottom: 80, padding: 5 }}>
         <View>
           <Image
-            source={{
-              uri: item.image
-                ? item.image
-                : 'https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png',
+            source={{uri: `http://197.243.14.102:3000/public/uploads/${item.image}`
             }}
             resizeMode='contain'
             style={styles.image}

@@ -25,19 +25,24 @@ const Checkout = (props) => {
   }, [cartItems]);
 
   const checkoutHandler = () => {
-    let order = {
-      city,
-      country,
-      dateOrdered: Date.now(),
-      orderItems,
-      phone,
-      shippingAddress1: address,
-      shippingAddress2: address2,
-      status: '3',
-      user,
-      zip,
-    };
-    props.navigation.navigate('Payment', { order: order });
+    if(city === null || country === null || phone === null || address === null || address2 === null || zip === null){
+      alert("Fill out all fields")
+    }else{
+      let order = {
+        city,
+        country,
+        dateOrdered: Date.now(),
+        orderItems,
+        phone,
+        shippingAddress1: address,
+        shippingAddress2: address2,
+        status: '3',
+        user,
+        zip,
+      };
+      props.navigation.navigate('Payment', { order: order });
+      
+    }
   };
   return (
     <KeyboardAwareScrollView>
@@ -92,8 +97,8 @@ const Checkout = (props) => {
             ))}
           </Picker>
         </Item>
-        <View style={{ width: 150, alignItems: 'center' }}>
-          <Button title='Confirm' onPress={() => checkoutHandler()} />
+        <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
+          <Button title='Confirm' onPress={checkoutHandler} />
         </View>
       </FormContainer>
     </KeyboardAwareScrollView>
