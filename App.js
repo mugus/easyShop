@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Navigation from './navigators/Navigation';
 import Toast from 'react-native-toast-message';
 import ShopContextProvider from './context/ShopContext';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 //Redux
 import store from './redux/store';
@@ -15,10 +16,16 @@ const App = () => {
   return (
     <ShopContextProvider>
       <Provider store={store}>
-        <Header />
-        <Navigation />
-        <Toast ref={(ref) => Toast.setRef(ref)} />
-        <StatusBar style='auto' />
+        <StripeProvider
+          publishableKey="517951544573875"
+          merchantIdentifier="merchant.identifier"
+        >
+          <Header />
+          <Navigation />
+          <Toast ref={(ref) => Toast.setRef(ref)} />
+          <StatusBar style='auto' />
+          
+        </StripeProvider>
       </Provider>
     </ShopContextProvider>
   );

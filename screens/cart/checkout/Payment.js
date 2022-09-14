@@ -13,7 +13,9 @@ import {
   Icon,
   Body,
   Title,
+  Card,
 } from 'native-base';
+import { CardField, useStripe } from '@stripe/stripe-react-native';
 
 const methods = [
   // { name: 'Cash on Delivery', value: 1 },
@@ -30,19 +32,51 @@ const paymentCards = [
 ];
 
 const Payment = (props) => {
+  const { confirmPayment } = useStripe();
+  // const order = props.route.params;
   const order = props.route.params;
 
   const [select, setSelect] = useState();
   const [card, setCard] = useState();
+  
   return (
     <Container>
       <Header>
         <Body>
-          <Title>Choose your payment method</Title>
+          <Title>Confirm your payment</Title>
         </Body>
       </Header>
       <Content>
-        {methods.map((item) => (
+        <Card>
+          
+        <CardField
+          postalCodeEnabled={true}
+          placeholders={{
+            number: '4242 4242 4242 4242',
+          }}
+          cardStyle={{
+            backgroundColor: '#FFFFFF',
+            textColor: '#000000',
+          }}
+          style={{
+            width: '100%',
+            height: 50,
+            marginVertical: 30,
+          }}
+          onCardChange={(cardDetails) => {
+            setCard(cardDetails)
+            console.log('cardDetails', cardDetails);
+          }}
+          onFocus={(focusedField) => {
+            console.log('focusField', focusedField);
+          }}
+        />
+
+        </Card>
+
+
+
+        {/* {methods.map((item) => (
           <ListItem key={item.name} onPress={() => setSelect(item.value)}>
             <Left>
               <Text>{item.name}</Text>
@@ -66,12 +100,21 @@ const Payment = (props) => {
               <Picker.Item label={c.name} value={c.name} />
             ))}
           </Picker>
-        ) : null}
-        <View style={{ marginTop: 60, alignSelf: 'center' }}>
-          <Button
-            title={'Confirm'}
-            onPress={() => props.navigation.navigate('Confirm', { order })}
-          />
+        ) : null} */}
+        <View style={{ marginTop: 20, width: '100%', alignSelf: 'center' }}>
+          {
+            card ?
+            <Button
+                title={'Confirm'}
+                onPress={() => props.navigation.navigate('Confirm', { order })}
+              />
+             : 
+             <Button
+                title={'Waiting'}
+                onPress={() => alert("Card content is required")}
+              />
+          }
+          
         </View>
       </Content>
     </Container>

@@ -64,7 +64,7 @@ const Confirm = ({ route, navigation }) => {
             ))}
           </View>
         ) : null}
-        <View style={{ alignItems: 'center', margin: 20 }}>
+        <View style={{ marginTop: 20, width: '90%', alignSelf: 'center' }}>
           <Button title={'Place order'} onPress={confirmOrder} />
         </View>
       </View>
